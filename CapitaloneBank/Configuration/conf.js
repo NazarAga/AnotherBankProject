@@ -1,13 +1,19 @@
 let SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 var HtmlReporter = require('protractor-beautiful-reporter');
+var jasmineReporters = require('jasmine-reporters');     
+var HTMLReport = require('protractor-html-reporter-2');
 
 exports.config = {
    
-    directConnect : true,
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+    // directConnect : true,
   
    capabilities: {
-    browserName: 'chrome'
+    // browserName: 'chrome'
+    browserName: 'internet explorer'
   },
+
+  
   
  specs: ['../Tests/CapitalOne.spec.js'], 
 //  suites:{
@@ -34,8 +40,45 @@ onPrepare: function () {
          jsonsSubfolder: 'jsons',
          docName: 'CapitalOneBank-Report.html'
      }).getJasmine2Reporter());
+     jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+      consolidateAll: true,
+      savePath: './',
+      filePrefix: 'xmlresults'
+  }));
   
 },
+onComplete: function() {
+  var browserName, browserVersion;
+  var capsPromise = browser.getCapabilities();
+
+  capsPromise.then(function (caps) {
+     browserName = caps.get('browserName');
+     browserVersion = caps.get('version');
+     platform = caps.get('platform');
+
+     testConfig = {
+         reportTitle: 'Protractor Test Execution Report',
+         outputPath: './',
+         outputFilename: 'ProtractorTestReport',
+         screenshotPath: './screenshots',
+         testBrowser: browserName,
+         browserVersion: browserVersion,
+         modifiedSuiteName: false,
+         screenshotsOnlyOnFailure: true,
+         testPlatform: platform
+     };
+     new HTMLReport().from('xmlresults.xml', testConfig);
+ });
+},
+plugins: [{
+  package: 'jasmine2-protractor-utils',
+  disableHTMLReport: true,
+  disableScreenshot: false,
+  screenshotPath:'./screenshots',
+  screenshotOnExpectFailure:false,
+  screenshotOnSpecFailure:true,
+  clearFoldersBeforeTest: true
+}],
     
     jasmineNodeOpts: {
         showColors: true, 

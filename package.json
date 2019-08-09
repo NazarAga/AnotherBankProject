@@ -1,7 +1,7 @@
 {
-  "name": "bugchasersproject",
+  "name": "sproject",
   "version": "1.0.0",
-  "description": "This is for BugChasersProject",
+  "description": "This is for NazarProject",
   "main": "index.js",
   "scripts": {
     "test": "protractor conf.js"
@@ -9,11 +9,15 @@
   "keywords": [
     "protractor"
   ],
-  "author": "BugChasers",
+  "author": "Nazars",
   "license": "ISC",
   "devDependencies": {
     "jasmine-spec-reporter": "^4.2.1",
     "protractor": "^5.4.1",
-    "protractor-beautiful-reporter": "^1.2.5"
+    "protractor-beautiful-reporter": "^1.2.5",
+    "jasmine-reporters": "^2.2.1"
+  },
+  "dependencies": {
+    "protractor-html-reporter-2": "^1.0.4"
   }
 }
