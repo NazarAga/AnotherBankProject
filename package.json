@@ -15,7 +15,7 @@
     "jasmine-spec-reporter": "^4.2.1",
     "protractor": "^5.4.1",
     "protractor-beautiful-reporter": "^1.2.5",
-    "jasmine-reporters": "^2.2.1"
+    "jasmine-reporters": "^2.5.0"
   },
   "dependencies": {
     "protractor-html-reporter-2": "^1.0.4"
